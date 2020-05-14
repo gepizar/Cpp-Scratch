@@ -25,6 +25,7 @@ Date::Date(int day, int month, int year) {
     Day(day);
 }
 
+// mutator: mutates day_
 void Date::Day(int day) {
     if (day >= 1 && day <= DaysInMonth(Month(), Year())) {
         day_ = day;
@@ -42,18 +43,14 @@ void Date::Year(int year) {
 }
 
 bool Date::LeapYear(int y) const {
-    if (y % 4 != 0) {
+    if (y % 4 != 0) 
         return false;
-    }
-    else if (y % 100 != 0) {
+    else if (y % 100 != 0) 
         return true;
-    }
-    else if (y % 400 != 0) {
+    else if (y % 400 != 0) 
         return false;
-    }
-    else {
+    else 
         return true;
-    }
 }
 
 int Date::DaysInMonth(int m, int y) const {
