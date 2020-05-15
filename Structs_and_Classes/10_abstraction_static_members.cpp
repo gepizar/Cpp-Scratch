@@ -16,6 +16,18 @@
  * static int counter
  * 
  * Declare pi_ as static
+ * 
+ * 
+ * Implementation
+ * 
+ * static members are declared within their class (often in a header file) but 
+ * in most cases they must be defined within the global scope. That's because 
+ * memory is allocated for static variables immediately when the program begins, 
+ * at the same time any global variables are initialized.
+ * 
+ * An exception to the global definition of static members is if such members 
+ * can be marked as constexpr. In that case, the static member variable can be 
+ * both declared and defined within the class definition:
  */
 
 class Sphere {
@@ -30,14 +42,20 @@ class Sphere {
         
 
     private:
-        // static float const pi_{3.14159}; // Error
-        // Error: 'constexpr' needed for in-class initialization 
         static float constexpr pi_{3.14159};
+        /* Using constexpr allow that the code run this expression at compile 
+         * time, but const do not allow this unless it is initialize outside the
+         * class.
+         */
+        // and can be delcare as const but initialize outside
+        // static float const pi_;
         int radius_;
         float volume_;
         void Validate();
 
 };
+
+// float const Sphere::pi_{3.14159};
 
 void Sphere::Validate() {
     if (Radius() <= 0) 
